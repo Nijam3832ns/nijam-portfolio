@@ -595,22 +595,37 @@ img { max-width: 100%; display: block; }
   width: 100%;
   max-width: 370px;
   text-align: center;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+}
+
+.avatar-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.25);
+  border-color: rgba(99, 157, 255, 0.4);
 }
 
 .avatar-halo {
   position: absolute;
-  inset: -15px;
+  inset: -10px;
   border-radius: 34px;
-  background: var(--gradient-main);
-  opacity: 0.18;
-  filter: blur(20px);
+  background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary), var(--accent-cyan));
+  background-size: 200% 200%;
+  opacity: 0.25;
+  filter: blur(25px);
   z-index: 0;
-  animation: haloGlow 4s ease-in-out infinite alternate;
+  animation: haloGlow 6s linear infinite alternate, gradientShift 8s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 @keyframes haloGlow {
-  0% { opacity: 0.15; filter: blur(20px); }
-  100% { opacity: 0.28; filter: blur(30px); }
+  0% { opacity: 0.2; filter: blur(20px); transform: scale(0.95); }
+  100% { opacity: 0.45; filter: blur(35px); transform: scale(1.05); }
 }
 
 .avatar-img {
@@ -620,12 +635,16 @@ img { max-width: 100%; display: block; }
   border-radius: 20px;
   position: relative;
   z-index: 1;
-  border: 2px solid rgba(255, 255, 255, 0.08);
-  transition: transform 0.5s ease;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  filter: grayscale(10%) contrast(105%);
 }
 
-.avatar-card:hover .avatar-img { transform: scale(1.03); }
-
+.avatar-card:hover .avatar-img {
+  transform: scale(1.04);
+  border-color: rgba(255, 255, 255, 0.25);
+  filter: grayscale(0%) contrast(110%);
+}
 .floating-badge {
   position: absolute;
   padding: 0.55rem 1.1rem;
